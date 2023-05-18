@@ -1,0 +1,16 @@
+<p>Welceome to {{hotelName}}!</p>
+<!-- [] box syntax -->
+<div [hidden]="hideRooms"><h6>We have <span [innerHTML]="numberOfRooms"></span> rooms</h6></div>
+<!-- () banana syntax -->
+<!-- optional chaining -->
+
+<div>
+   <button (click)="addRoom()">Add room</button>
+</div>
+<div *ngIf="selectedRoom">
+   {{selectedRoom | json}}
+</div>
+<div *ngIf="rooms && rooms.availableRooms > 0">
+   <app-rooms-list [rooms]="roomsList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+</div>
+<button (click)="toggle()">Toggle Rooms</button>
