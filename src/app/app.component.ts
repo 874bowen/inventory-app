@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { RoomsComponent } from './rooms/rooms.component';
 
 @Component({
   selector: 'app-root',
@@ -18,4 +19,20 @@ export class AppComponent {
   title = 'hotelinventoryapp';
 
   role = 'Admin'
+
+  // @ViewChild('user', { read: ViewContainerRef} ) vcr!: ViewContainerRef
+
+  // accessing a html element using ViewChild
+  // @ViewChild('name', {static: true}) name!: ElementRef
+  
+  // ngOnInit(): void {
+  //   console.log(this.name);
+  //   this.name.nativeElement.innerText = 'This is The Bowen Hotel'
+  // }
+
+  // Dynamically load a component with ViewChild
+  // ngAfterViewInit(): void {
+  //   const componentRef = this.vcr.createComponent(RoomsComponent)
+  //   componentRef.instance.numberOfRooms = 50
+  // }
 }
