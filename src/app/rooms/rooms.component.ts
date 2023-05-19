@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, ViewChild, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { Room, RoomList } from './rooms';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
   // interpolation
   hotelName = 'The Hilton Hotel'
-  hideRooms = false
+  hideRooms = true
   // property binding
   roomsList: RoomList[] = []
   rooms: Room = {
@@ -19,11 +20,37 @@ export class RoomsComponent implements OnInit {
   }
   numberOfRooms = 10
 
+  title = 'Hotel Rooms List'
+
   selectedRoom!: RoomList
   
+  // , {static: true } second parameter to ViewChild decorator
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
+
+  // @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>
+
   constructor() {}
 
+  ngAfterViewInit(): void {
+     this.headerComponent.title = 'Rooms List Header'
+  
+    // this.headerChildrenComponent.forEach((headerComponent:HeaderComponent) => {
+    //   headerComponent.title="This is the Title"
+    // })
+  }
+
+  ngAfterViewChecked(): void {
+    // rarely used
+    // this.headerComponent.title = 'Rooms List Header'
+  }
+
+  ngDoCheck(): void {
+    console.log('Do check called')
+  }
+
   ngOnInit(): void {
+    // console.log(this.headerComponent);
+    
     this.roomsList = [
       {
         roomNumber: 1,
@@ -70,6 +97,7 @@ export class RoomsComponent implements OnInit {
 
   toggle() {
     this.hideRooms = !this.hideRooms
+    this.title = 'Rooms List Title Updated'
   }
 
   selectRoom(room: RoomList) {

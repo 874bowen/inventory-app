@@ -1,4 +1,7 @@
-<p>Welceome to {{hotelName}}!</p>
+<!-- <p>Welceome to {{hotelName}}!</p> -->
+<app-header></app-header>
+<app-header></app-header>
+<app-header></app-header>
 <!-- [] box syntax -->
 <div [hidden]="hideRooms"><h6>We have <span [innerHTML]="numberOfRooms"></span> rooms</h6></div>
 <!-- () banana syntax -->
@@ -11,6 +14,6 @@
    {{selectedRoom | json}}
 </div>
 <div *ngIf="rooms && rooms.availableRooms > 0">
-   <app-rooms-list [rooms]="roomsList" (selectedRoom)="selectRoom($event)"></app-rooms-list>
+   <app-rooms-list [rooms]="roomsList" (selectedRoom)="selectRoom($event)" [title]="title" [hidden]="hideRooms"></app-rooms-list>
 </div>
 <button (click)="toggle()">Toggle Rooms</button>
