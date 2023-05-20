@@ -1,6 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, ViewChild, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -29,7 +30,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   // @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>
 
-  constructor() {}
+  // roomService = new RoomsService() -- do not do this
+
+  constructor(private roomsService: RoomsService) {}
 
   ngAfterViewInit(): void {
      this.headerComponent.title = 'Rooms List Header'
@@ -50,49 +53,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   ngOnInit(): void {
     // console.log(this.headerComponent);
-    
-    this.roomsList = [
-      {
-        roomNumber: 1,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 500,
-        photo: '',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date('12-Dec-2023'),
-        rating: 4.5
-      },
-      {
-        roomNumber: 2,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 500,
-        photo: '',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date('12-Dec-2023'),
-        rating: 2.5
-      },
-      {
-        roomNumber: 3,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 500,
-        photo: '',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date('12-Dec-2023'),
-        rating: 5
-      },
-      {
-        roomNumber: 4,
-        roomType: 'Deluxe Room',
-        amenities: 'Air Conditioner, Free Wi-Fi, TV, Bathroom, Kitchen',
-        price: 500,
-        photo: '',
-        checkinTime: new Date('11-Nov-2023'),
-        checkoutTime: new Date('12-Dec-2023'),
-        rating: 3.2
-      },
-    ]
+    this.roomsList = this.roomsService.getRooms()
   }
 
   toggle() {
