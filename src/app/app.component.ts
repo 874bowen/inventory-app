@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef, Optional } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewContainerRef, Optional, Inject } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from './logger.service';
+import { LocalStorageToken } from './localstorage.token';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,11 @@ export class AppComponent {
 
   role = 'Admin'
 
-  constructor(@Optional() private loggerService: LoggerService) { }
+  constructor(@Optional() private loggerService: LoggerService, @Inject(LocalStorageToken) private localStorage: Storage) { }
 
   ngOnInit () {
     this.loggerService?.log('AppComponent.ngOnInit()')
+    this.localStorage.setItem('name', 'Bowen Hotel')
   }
 
   // @ViewChild('user', { read: ViewContainerRef} ) vcr!: ViewContainerRef
