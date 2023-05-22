@@ -14,6 +14,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   hideRooms = true
   // property binding
   roomsList: RoomList[] = []
+  
+  unicornList: [] = []
   rooms: Room = {
     totalRooms: 20,
     availableRooms: 10,
@@ -54,6 +56,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   ngOnInit(): void {
     // console.log(this.headerComponent);
     this.roomsList = this.roomsService.getRooms()
+    this.roomsService.getUnicorn().subscribe(data => console.log(data))
+    console.log(this.unicornList);
+    
+    
   }
 
   toggle() {

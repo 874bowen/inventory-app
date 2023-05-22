@@ -3,6 +3,7 @@ import { RoomList } from '../rooms';
 import { environment } from 'src/environments/environment';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appconfig.service';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -51,14 +52,21 @@ export class RoomsService {
     },
   ]
   // using value provider
-  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig) {
+  constructor(@Inject(APP_SERVICE_CONFIG) private config: AppConfig, private http: HttpClient) {
     // one instance of this service not multiple, what if you want a different instance say for Employee? Pass the providers to employee
     console.log("Room Service initialized");
     console.log(this.config.apiEndpoint);
     
   }
 
-  getRooms() {
+  getRooms() {    
     return this.roomsList
+  }
+  
+  getUnicorn() {
+    let headers = new HttpHeaders({})
+    return this.http.get<any>('https://crudcrud.com/api/a83aaf547c0741cc8b07faf8d4214b17/unicorns', {
+    headers: headers
+    })
   }
 }
